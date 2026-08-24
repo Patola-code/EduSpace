@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduSpace - Plateforme Scolaire</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-book-open"></i>
+                <span>EduSpace</span>
+            </div>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#" data-page="dashboard" class="nav-link active"><i class="fas fa-home"></i> <span>Tableau de bord</span></a></li>
+                <li><a href="#" data-page="subjects" class="nav-link"><i class="fas fa-book"></i> <span>Matières</span></a></li>
+                <li><a href="#" data-page="homework" class="nav-link"><i class="fas fa-tasks"></i> <span>Devoirs</span></a></li>
+                <li><a href="#" data-page="grades" class="nav-link"><i class="fas fa-chart-bar"></i> <span>Notes</span></a></li>
+                <li><a href="#" data-page="exams" class="nav-link"><i class="fas fa-graduation-cap"></i> <span>Contrôles</span></a></li>
+                <li><a href="#" data-page="calendar" class="nav-link"><i class="fas fa-calendar"></i> <span>Calendrier</span></a></li>
+                <li><a href="#" data-page="goals" class="nav-link"><i class="fas fa-target"></i> <span>Objectifs</span></a></li>
+                <li><a href="#" data-page="resources" class="nav-link"><i class="fas fa-library"></i> <span>Ressources</span></a></li>
+                <li><a href="#" data-page="profile" class="nav-link"><i class="fas fa-user"></i> <span>Profil</span></a></li>
+            </ul>
+            <div class="nav-toggle" id="navToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div class="nav-controls">
+                <button class="theme-toggle" id="themeToggle" title="Changer le thème">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button class="search-toggle" id="searchToggle" title="Rechercher">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Search Modal -->
+    <div class="search-modal" id="searchModal">
+        <div class="search-modal-content">
+            <input type="text" class="search-input" id="searchInput" placeholder="Rechercher dans EduSpace...">
+            <div class="search-results" id="searchResults"></div>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <main class="main-container">
+        <!-- Dashboard Page -->
+        <div class="page" id="dashboard-page">
+            <div class="page-header">
+                <h1>Tableau de bord</h1>
+                <p class="greeting" id="greeting">Bienvenue</p>
+            </div>
+
+            <div class="dashboard-grid">
+                <!-- Stats Cards -->
+                <div class="stats-row">
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: #FF6B6B;">
+                            <i class="fas fa-tasks"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-value" id="homeworkCount">0</div>
+                            <div class="stat-label">Devoirs à faire</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: #4ECDC4;">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-value" id="examsCount">0</div>
+                            <div class="stat-label">Prochains contrôles</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: #45B7D1;">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-value" id="averageGrade">--</div>
+                            <div class="stat-label">Moyenne générale</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: #96CEB4;">
+                            <i class="fas fa-target"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-value" id="goalsProgress">0%</div>
+                            <div class="stat-label">Progression objectifs</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Main Content Row -->
+                <div class="dashboard-main">
+                    <!-- Recent Tasks -->
+                    <div class="dashboard-card">
+                        <div class="card-header">
+                            <h2><i class="fas fa-clock"></i> Tâches récentes</h2>
+                            <a href="#" data-page="homework" class="link-more">Voir tout</a>
+                        </div>
+                        <div class="tasks-list" id="recentTasks">
+                            <p class="empty-state">Aucune tâche récente</p>
+                        </div>
+                    </div>
+
+                    <!-- Upcoming Exams -->
+                    <div class="dashboard-card">
+                        <div class="card-header">
+                            <h2><i class="fas fa-calendar-check"></i> Prochains contrôles</h2>
+                            <a href="#" data-page="exams" class="link-more">Voir tout</a>
+                        </div>
+                        <div class="exams-list" id="upcomingExams">
+                            <p class="empty-state">Aucun contrôle prévu</p>
+                        </div>
+                    </div>
+
+                    <!-- Main Subjects -->
+                    <div class="dashboard-card">
+                        <div class="card-header">
+                            <h2><i class="fas fa-book"></i> Matières principales</h2>
+                            <a href="#" data-page="subjects" class="link-more">Gérer</a>
+                        </div>
+                        <div class="subjects-grid" id="mainSubjects">
+                            <p class="empty-state">Aucune matière ajoutée</p>
+                        </div>
+                    </div>
+
+                    <!-- Goals Progress -->
+                    <div class="dashboard-card">
+                        <div class="card-header">
+                            <h2><i class="fas fa-star"></i> Vos objectifs</h2>
+                            <a href="#" data-page="goals" class="link-more">Gérer</a>
+                        </div>
+                        <div class="goals-list" id="dashboardGoals">
+                            <p class="empty-state">Aucun objectif défini</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Calendar Preview -->
+                <div class="dashboard-card full-width">
+                    <div class="card-header">
+                        <h2><i class="fas fa-calendar-alt"></i> Calendrier du mois</h2>
+                    </div>
+                    <div class="calendar-preview" id="calendarPreview"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Subjects Page -->
+        <div class="page" id="subjects-page" style="display: none;">
+            <div class="page-header">
+                <h1>Matières</h1>
+                <button class="btn btn-primary" id="addSubjectBtn">
+                    <i class="fas fa-plus"></i> Ajouter une matière
+                </button>
+            </div>
+
+            <div class="subjects-container">
+                <div class="subjects-list" id="subjectsList"></div>
+            </div>
+        </div>
+
+        <!-- Homework Page -->
+        <div class="page" id="homework-page" style="display: none;">
+            <div class="page-header">
+                <h1>Devoirs</h1>
+                <button class="btn btn-primary" id="addHomeworkBtn">
+                    <i class="fas fa-plus"></i> Ajouter un devoir
+                </button>
+            </div>
+
+            <div class="homework-container">
+                <div class="filters-bar">
+                    <select id="homeworkSubjectFilter" class="filter-select">
+                        <option value="">Toutes les matières</option>
+                    </select>
+                    <select id="homeworkPriorityFilter" class="filter-select">
+                        <option value="">Toutes les priorités</option>
+                        <option value="basse">Basse</option>
+                        <option value="normale">Normale</option>
+                        <option value="haute">Haute</option>
+                    </select>
+                    <select id="homeworkStatusFilter" class="filter-select">
+                        <option value="">Tous les statuts</option>
+                        <option value="à faire">À faire</option>
+                        <option value="en cours">En cours</option>
+                        <option value="terminé">Terminé</option>
+                    </select>
+                </div>
+
+                <div class="homework-list" id="homeworkList"></div>
+            </div>
+        </div>
+
+        <!-- Grades Page -->
+        <div class="page" id="grades-page" style="display: none;">
+            <div class="page-header">
+                <h1>Notes</h1>
+                <button class="btn btn-primary" id="addGradeBtn">
+                    <i class="fas fa-plus"></i> Ajouter une note
+                </button>
+            </div>
+
+            <div class="grades-container">
+                <div class="grades-stats">
+                    <div class="grade-stat">
+                        <span class="stat-label">Moyenne générale</span>
+                        <span class="stat-value" id="generalAverage">--</span>
+                    </div>
+                    <div class="grade-stat">
+                        <span class="stat-label">Notes saisies</span>
+                        <span class="stat-value" id="gradesCount">0</span>
+                    </div>
+                </div>
+
+                <div class="grades-by-subject" id="gradesBySubject"></div>
+            </div>
+        </div>
+
+        <!-- Exams Page -->
+        <div class="page" id="exams-page" style="display: none;">
+            <div class="page-header">
+                <h1>Contrôles et Examens</h1>
+                <button class="btn btn-primary" id="addExamBtn">
+                    <i class="fas fa-plus"></i> Ajouter un contrôle
+                </button>
+            </div>
+
+            <div class="exams-container">
+                <div class="exams-list" id="examsList"></div>
+            </div>
+        </div>
+
+        <!-- Calendar Page -->
+        <div class="page" id="calendar-page" style="display: none;">
+            <div class="page-header">
+                <h1>Calendrier</h1>
+                <button class="btn btn-primary" id="addEventBtn">
+                    <i class="fas fa-plus"></i> Ajouter un événement
+                </button>
+            </div>
+
+            <div class="calendar-container">
+                <div class="calendar-header">
+                    <button id="prevMonth" class="calendar-nav-btn">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <h2 id="currentMonth"></h2>
+                    <button id="nextMonth" class="calendar-nav-btn">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+                <div class="calendar-grid" id="calendarGrid"></div>
+                <div class="calendar-events" id="calendarEvents"></div>
+            </div>
+        </div>
+
+        <!-- Goals Page -->
+        <div class="page" id="goals-page" style="display: none;">
+            <div class="page-header">
+                <h1>Objectifs</h1>
+                <button class="btn btn-primary" id="addGoalBtn">
+                    <i class="fas fa-plus"></i> Ajouter un objectif
+                </button>
+            </div>
+
+            <div class="goals-container">
+                <div class="goals-list" id="goalsList"></div>
+            </div>
+        </div>
+
+        <!-- Resources Page -->
+        <div class="page" id="resources-page" style="display: none;">
+            <div class="page-header">
+                <h1>Ressources</h1>
+                <button class="btn btn-primary" id="addResourceBtn">
+                    <i class="fas fa-plus"></i> Ajouter une ressource
+                </button>
+            </div>
+
+            <div class="resources-container">
+                <div class="filters-bar">
+                    <select id="resourceSubjectFilter" class="filter-select">
+                        <option value="">Toutes les catégories</option>
+                    </select>
+                </div>
+                <div class="resources-grid" id="resourcesList"></div>
+            </div>
+        </div>
+
+        <!-- Profile Page -->
+        <div class="page" id="profile-page" style="display: none;">
+            <div class="page-header">
+                <h1>Mon Profil</h1>
+            </div>
+
+            <div class="profile-container">
+                <div class="profile-card">
+                    <h2>Informations personnelles</h2>
+                    <button class="btn btn-secondary" id="editProfileBtn">
+                        <i class="fas fa-edit"></i> Modifier
+                    </button>
+                    <div class="profile-info" id="profileInfo"></div>
+                </div>
+
+                <div class="profile-stats">
+                    <div class="profile-stat">
+                        <div class="stat-label">Moyenne générale</div>
+                        <div class="stat-value" id="profileAverage">--</div>
+                    </div>
+                    <div class="profile-stat">
+                        <div class="stat-label">Devoirs terminés</div>
+                        <div class="stat-value" id="profileHomework">0</div>
+                    </div>
+                    <div class="profile-stat">
+                        <div class="stat-label">Objectifs atteints</div>
+                        <div class="stat-value" id="profileGoals">0</div>
+                    </div>
+                    <div class="profile-stat">
+                        <div class="stat-label">Matières suivies</div>
+                        <div class="stat-value" id="profileSubjects">0</div>
+                    </div>
+                </div>
+
+                <div class="profile-actions">
+                    <h3>Actions</h3>
+                    <button class="btn btn-secondary" id="exportDataBtn">
+                        <i class="fas fa-download"></i> Exporter les données
+                    </button>
+                    <button class="btn btn-secondary" id="importDataBtn">
+                        <i class="fas fa-upload"></i> Importer les données
+                    </button>
+                    <button class="btn btn-danger" id="resetDataBtn">
+                        <i class="fas fa-trash"></i> Réinitialiser les données
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal for Adding/Editing -->
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle"></h2>
+                <button class="modal-close" id="modalClose">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <form class="modal-form" id="modalForm"></form>
+        </div>
+    </div>
+
+    <!-- Confirmation Modal -->
+    <div class="modal" id="confirmModal">
+        <div class="modal-content modal-confirm">
+            <div class="modal-header">
+                <h2 id="confirmTitle">Confirmation</h2>
+            </div>
+            <p id="confirmMessage"></p>
+            <div class="modal-actions">
+                <button class="btn btn-secondary" id="confirmCancel">Annuler</button>
+                <button class="btn btn-danger" id="confirmOk">Confirmer</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification -->
+    <div class="notification" id="notification">
+        <span id="notificationMessage"></span>
+    </div>
+
+    <!-- Hidden file input for import -->
+    <input type="file" id="importFile" accept=".json" style="display: none;">
+
+    <script src="script.js"></script>
+</body>
+</html>
